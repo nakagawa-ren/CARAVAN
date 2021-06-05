@@ -1,6 +1,8 @@
 class BlogsController < ApplicationController
   def index
     @blogs = Blog.all
+    p "標準出力時にのみ反映"
+    logger.debug("標準出力とログファイルに記録される")
   end
 
   def show
@@ -13,6 +15,7 @@ class BlogsController < ApplicationController
 
   def create
     blog = Blog.new(blog_params)
+    # binding.pry =>の時点で処理を止めて、変数の中身などを確認することができる
     blog.save
     redirect_to blog_path(blog.id)
   end
